@@ -2,9 +2,21 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from transformers import pipeline
 import random
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
 
 # Initialize FastAPI app
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins (for development)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Load sentiment analysis model
 model_name = "nlptown/bert-base-multilingual-uncased-sentiment"
